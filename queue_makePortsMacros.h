@@ -14,10 +14,10 @@
 
 
 #define QUEUE_STATIC_CREATE_PORT_HEADER(portName) \
-    bool Queue_##portName##TxPort_Create(void);
+    bool Queue_##portName##Port_Create(void);
 
 #define QUEUE_STATIC_CREATE_PORT(portName, elSize, elAmount) \
-    bool Queue_##portName##TxPort_Create(void){ \
+    bool Queue_##portName##Port_Create(void){ \
         _##portName##Que = Queue_Create(1, elSize*elAmount, _##portName##QueElMem, &_##portName##QueCtrlMem); \
         if (_##portName##Que == NULL){ \
             return false; \
@@ -27,10 +27,10 @@
 
 
 #define QUEUE_STATIC_PUT_PORT_HEADER(portName) \
-bool Queue_##portName##TxPort_Put(const void* elPtr);
+bool Queue_##portName##Port_Put(const void* elPtr);
 
 #define QUEUE_STATIC_PUT_PORT(portName) \
-    bool Queue_##portName##TxPort_Put(const void* elPtr){ \
+    bool Queue_##portName##Port_Put(const void* elPtr){ \
         if(Queue_Put(_##portName##Que, elPtr) == Que_OK){ \
             return true; \
         } \
@@ -39,10 +39,10 @@ bool Queue_##portName##TxPort_Put(const void* elPtr);
 
 
 #define QUEUE_STATIC_GET_PORT_HEADER(portName) \
-bool Queue_##portName##TxPort_Get(void* elPtr);
+bool Queue_##portName##Port_Get(void* elPtr);
 
 #define QUEUE_STATIC_GET_PORT(portName) \
-    bool Queue_##portName##TxPort_Get(void* elPtr){ \
+    bool Queue_##portName##Port_Get(void* elPtr){ \
         if(Queue_Get(_##portName##Que, elPtr) == Que_OK){ \
             return true; \
         } \
@@ -51,10 +51,10 @@ bool Queue_##portName##TxPort_Get(void* elPtr);
 
 
 #define QUEUE_STATIC_GET_MAX_DEPTH_PORT_HEADER(portName) \
-uint16_t Queue_##portName##TxPortGetMaxDepth(void);
+uint16_t Queue_##portName##PortGetMaxDepth(void);
 
 #define QUEUE_STATIC_GET_MAX_DEPTH_PORT(portName) \
-    uint16_t Queue_##portName##TxPortGetMaxDepth(void){ \
+    uint16_t Queue_##portName##PortGetMaxDepth(void){ \
         return Queue_GetMaxDepth(_##portName##Que); \
     }
 
